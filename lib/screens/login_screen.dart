@@ -1,7 +1,10 @@
 // Sign-in / register — same Uellow customer account.
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../api.dart';
+import '../fcm_service.dart';
 import '../main.dart';
 import 'home_screen.dart';
 
@@ -35,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
             password: _pass.text, phone: _phone.text.trim());
       } else {
         await RevApi.instance.login(_email.text.trim(), _pass.text);
+      unawaited(FcmService.instance.register());
       }
       if (!mounted) return;
       Navigator.pushReplacement(context,

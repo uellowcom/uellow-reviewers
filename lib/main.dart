@@ -1,9 +1,12 @@
 // =============================================================================
 // Uellow Reviewers — standalone specialists companion app (v1.0.0).
 // =============================================================================
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'api.dart';
+import 'fcm_service.dart';
 import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
 
@@ -18,6 +21,7 @@ const kRed = Color(0xFFC0392B);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await RevApi.instance.init();
+  unawaited(FcmService.instance.init());
   runApp(const ReviewersApp());
 }
 
